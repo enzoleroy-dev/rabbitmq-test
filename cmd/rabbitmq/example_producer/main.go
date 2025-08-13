@@ -97,7 +97,7 @@ func main() {
 
 		// Generate and send deposit message
 		depositMsg := generateLaosDepositMessage(accountId)
-		err = producer.PublishMessage(depositTopic, cfg.RabbitDepositExchangeName, depositMsg, "deposit")
+		err = producer.PublishMessage(depositTopic, cfg.RabbitDepositExchangeName, depositMsg, "DEPOSIT")
 		if err != nil {
 			log.Printf("Failed to publish deposit message for account %s: %v", accountId, err)
 		} else {
@@ -110,7 +110,7 @@ func main() {
 
 		// Generate and send withdraw message
 		withdrawMsg := generateLaosWithdrawMessage(accountId)
-		err = producer.PublishMessage(withdrawTopic, cfg.RabbitWithdrawExchangeName, withdrawMsg, "withdraw")
+		err = producer.PublishMessage(withdrawTopic, cfg.RabbitWithdrawExchangeName, withdrawMsg, "WITHDRAW")
 		if err != nil {
 			log.Printf("Failed to publish withdraw message for account %s: %v", accountId, err)
 		} else {

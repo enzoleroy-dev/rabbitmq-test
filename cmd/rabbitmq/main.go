@@ -74,8 +74,6 @@ func main() {
 		TLSCert:       cfg.RabbitMQTLSCert,
 		TLSKey:        cfg.RabbitMQTLSKey,
 		TLSSkipVerify: cfg.RabbitMQTLSSkipVerify,
-		DepositExchangeName:  cfg.RabbitDepositExchangeName,
-		WithdrawExchangeName: cfg.RabbitWithdrawExchangeName,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create consumer: %v", err)
@@ -83,13 +81,13 @@ func main() {
 	defer consumer.Close()
 
 	// Laos deposit consumer
-	err = consumer.ConsumeDepositQueue(cfg.RabbitLaosDepositTopic, handleTransactionMessage)
+	err = consumer.ConsumeMessage(cfg.RabbitLaosDepositTopic, cfg.RabbitDepositExchangeName, "DEPOSIT", handleTransactionMessage)
 	if err != nil {
 		log.Fatalf("Failed to set up deposit consumer: %v", err)
 	}
 
 	// Laos withdrawal consumer
-	err = consumer.ConsumeWithdrawQueue(cfg.RabbitLaosWithdrawalTopic, handleTransactionMessage)
+	err = consumer.ConsumeMessage(cfg.RabbitLaosWithdrawalTopic, cfg.RabbitWithdrawExchangeName, "WITHDRAW", handleTransactionMessage)
 	if err != nil {
 		log.Fatalf("Failed to set up withdraw consumer: %v", err)
 	}
