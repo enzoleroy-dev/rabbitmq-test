@@ -81,13 +81,13 @@ func main() {
 	defer consumer.Close()
 
 	// Laos deposit consumer
-	err = consumer.ConsumeMessage(cfg.RabbitLaosDepositTopic, cfg.RabbitDepositExchangeName, "DEPOSIT", handleTransactionMessage)
+	err = consumer.ConsumeMessage(cfg.RabbitDepositExchangeName, cfg.RabbitLaosDepositTopic, "DEPOSIT", handleTransactionMessage)
 	if err != nil {
 		log.Fatalf("Failed to set up deposit consumer: %v", err)
 	}
 
 	// Laos withdrawal consumer
-	err = consumer.ConsumeMessage(cfg.RabbitLaosWithdrawalTopic, cfg.RabbitWithdrawExchangeName, "WITHDRAW", handleTransactionMessage)
+	err = consumer.ConsumeMessage(cfg.RabbitWithdrawExchangeName, cfg.RabbitLaosWithdrawalTopic, "WITHDRAW", handleTransactionMessage)
 	if err != nil {
 		log.Fatalf("Failed to set up withdraw consumer: %v", err)
 	}
