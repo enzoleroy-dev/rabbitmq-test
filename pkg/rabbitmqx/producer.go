@@ -24,9 +24,6 @@ type Config struct {
 	TLSCert       string
 	TLSKey        string
 	TLSSkipVerify bool
-	// Exchange names
-	DepositExchangeName  string
-	WithdrawExchangeName string
 }
 
 // NewProducer creates a new RabbitMQ producer
@@ -121,20 +118,4 @@ func (p *Producer) PublishMessage(exchangeName string, topic string, message map
 	}
 
 	return nil
-}
-
-// PublishWithdrawMessage publishes a withdrawal message to RabbitMQ using topic exchange
-// This function is maintained for backward compatibility and uses the generic PublishMessage function
-func (p *Producer) PublishWithdrawMessage(topic string, message map[string]interface{}) error {
-	// Use exchange name from config
-	exchangeName := p.config.WithdrawExchangeName
-	return p.PublishMessage(exchangeName, topic, message, "withdraw")
-}
-
-// PublishDepositMessage publishes a deposit message to RabbitMQ using topic exchange
-// This function is maintained for backward compatibility and uses the generic PublishMessage function
-func (p *Producer) PublishDepositMessage(topic string, message map[string]interface{}) error {
-	// Use exchange name from config
-	exchangeName := p.config.DepositExchangeName
-	return p.PublishMessage(exchangeName, topic, message, "deposit")
 }

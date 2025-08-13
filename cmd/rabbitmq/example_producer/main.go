@@ -74,8 +74,6 @@ func main() {
 		TLSCert:       cfg.RabbitMQTLSCert,
 		TLSKey:        cfg.RabbitMQTLSKey,
 		TLSSkipVerify: cfg.RabbitMQTLSSkipVerify,
-		DepositExchangeName:  cfg.RabbitDepositExchangeName,
-		WithdrawExchangeName: cfg.RabbitWithdrawExchangeName,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create producer: %v", err)
@@ -99,7 +97,7 @@ func main() {
 
 		// Generate and send deposit message
 		depositMsg := generateLaosDepositMessage(accountId)
-		err = producer.PublishDepositMessage(depositTopic, depositMsg)
+		err = producer.PublishMessage(depositTopic, cfg.RabbitDepositExchangeName, depositMsg, "deposit")
 		if err != nil {
 			log.Printf("Failed to publish deposit message for account %s: %v", accountId, err)
 		} else {
@@ -112,7 +110,7 @@ func main() {
 
 		// Generate and send withdraw message
 		withdrawMsg := generateLaosWithdrawMessage(accountId)
-		err = producer.PublishWithdrawMessage(withdrawTopic, withdrawMsg)
+		err = producer.PublishMessage(withdrawTopic, cfg.RabbitWithdrawExchangeName, withdrawMsg, "withdraw")
 		if err != nil {
 			log.Printf("Failed to publish withdraw message for account %s: %v", accountId, err)
 		} else {
