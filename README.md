@@ -30,12 +30,15 @@ docker-compose up -d
 direnv allow
 go run cmd/rabbitmq/main.go
 ```
+<image src="./images/consumer.png">
 
 ## Terminal 2: Run Producer publish message to RabbitMQ
 ```bash
 direnv allow
 go run cmd/rabbitmq/example_producer/main.go
 ```
+<image src="./images/producer.png">
+
 
 ## Note
 - `direnv allow` is export environment variables from `.env` file
