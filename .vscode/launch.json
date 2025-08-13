@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "serve-consumer",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/cmd/rabbitmq/main.go",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "serve-producer",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/cmd/rabbitmq/example_producer/main.go",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
