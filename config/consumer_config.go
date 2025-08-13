@@ -15,16 +15,17 @@ type ConsumerConfig struct {
 	RabbitMQPassword string `env:"RABBITMQ_PASSWORD,required"`
 
 	// RabbitMQ TLS Configuration
-	RabbitMQUseTLS   bool   `env:"RABBITMQ_USE_TLS" envDefault:"false"`
-	RabbitMQTLSCACert string `env:"RABBITMQ_TLS_CA_CERT" envDefault:""`
-	RabbitMQTLSCert   string `env:"RABBITMQ_TLS_CERT" envDefault:""`
-	RabbitMQTLSKey    string `env:"RABBITMQ_TLS_KEY" envDefault:""`
-	RabbitMQTLSSkipVerify bool `env:"RABBITMQ_TLS_SKIP_VERIFY" envDefault:"false"`
+	RabbitMQUseTLS        bool   `env:"RABBITMQ_USE_TLS" envDefault:"false"`
+	RabbitMQTLSCACert     string `env:"RABBITMQ_TLS_CA_CERT" envDefault:""`
+	RabbitMQTLSCert       string `env:"RABBITMQ_TLS_CERT" envDefault:""`
+	RabbitMQTLSKey        string `env:"RABBITMQ_TLS_KEY" envDefault:""`
+	RabbitMQTLSSkipVerify bool   `env:"RABBITMQ_TLS_SKIP_VERIFY" envDefault:"false"`
 
 	// RabbitMQ Exchange Names
-	RabbitDepositExchangeName  string `env:"RABBITMQ_DEPOSIT_EXCHANGE_NAME" envDefault:"laos_deposit_exchange"`
-	RabbitWithdrawExchangeName string `env:"RABBITMQ_WITHDRAW_EXCHANGE_NAME" envDefault:"laos_withdraw_exchange"`
+	RabbitDepositExchangeName  string `env:"RABBITMQ_DEPOSIT_EXCHANGE_NAME,required"`
+	RabbitWithdrawExchangeName string `env:"RABBITMQ_WITHDRAW_EXCHANGE_NAME,required"`
 
+	// RabbitMQ Topic Names
 	RabbitLaosDepositTopic    string `env:"RABBITMQ_LAOS_DEPOSIT_TOPIC,required"`
 	RabbitLaosWithdrawalTopic string `env:"RABBITMQ_LAOS_WITHDRAWAL_TOPIC,required"`
 }
