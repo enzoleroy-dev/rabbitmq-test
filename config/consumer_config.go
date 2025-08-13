@@ -21,6 +21,10 @@ type ConsumerConfig struct {
 	RabbitMQTLSKey    string `env:"RABBITMQ_TLS_KEY" envDefault:""`
 	RabbitMQTLSSkipVerify bool `env:"RABBITMQ_TLS_SKIP_VERIFY" envDefault:"false"`
 
+	// RabbitMQ Exchange Names
+	RabbitDepositExchangeName  string `env:"RABBITMQ_DEPOSIT_EXCHANGE_NAME" envDefault:"laos_deposit_exchange"`
+	RabbitWithdrawExchangeName string `env:"RABBITMQ_WITHDRAW_EXCHANGE_NAME" envDefault:"laos_withdraw_exchange"`
+
 	RabbitLaosDepositTopic    string `env:"RABBITMQ_LAOS_DEPOSIT_TOPIC,required"`
 	RabbitLaosWithdrawalTopic string `env:"RABBITMQ_LAOS_WITHDRAWAL_TOPIC,required"`
 }

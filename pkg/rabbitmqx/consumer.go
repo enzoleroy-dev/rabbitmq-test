@@ -69,8 +69,8 @@ func (c *Consumer) Close() {
 
 // ConsumeDepositQueue starts consuming messages from the deposit queue with wildcard support
 func (c *Consumer) ConsumeDepositQueue(topicPattern string, handler func([]byte) error) error {
-	// Declare a topic exchange
-	exchangeName := "laos_deposit_exchange"
+	// Use exchange name from config
+	exchangeName := c.config.DepositExchangeName
 	err := c.channel.ExchangeDeclare(
 		exchangeName, // name
 		"topic",      // type
@@ -158,8 +158,8 @@ func (c *Consumer) ConsumeDepositQueue(topicPattern string, handler func([]byte)
 
 // ConsumeWithdrawQueue starts consuming messages from the withdraw queue with wildcard support
 func (c *Consumer) ConsumeWithdrawQueue(topicPattern string, handler func([]byte) error) error {
-	// Declare a topic exchange
-	exchangeName := "laos_withdraw_exchange"
+	// Use exchange name from config
+	exchangeName := c.config.WithdrawExchangeName
 	err := c.channel.ExchangeDeclare(
 		exchangeName, // name
 		"topic",      // type

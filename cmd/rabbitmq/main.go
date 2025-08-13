@@ -74,6 +74,8 @@ func main() {
 		TLSCert:       cfg.RabbitMQTLSCert,
 		TLSKey:        cfg.RabbitMQTLSKey,
 		TLSSkipVerify: cfg.RabbitMQTLSSkipVerify,
+		DepositExchangeName:  cfg.RabbitDepositExchangeName,
+		WithdrawExchangeName: cfg.RabbitWithdrawExchangeName,
 	})
 	if err != nil {
 		log.Fatalf("Failed to create consumer: %v", err)
