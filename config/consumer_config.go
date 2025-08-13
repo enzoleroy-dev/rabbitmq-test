@@ -15,11 +15,11 @@ type ConsumerConfig struct {
 	RabbitMQPassword string `env:"RABBITMQ_PASSWORD,required"`
 
 	// RabbitMQ TLS Configuration
-	RabbitMQUseTLS        bool   `env:"RABBITMQ_USE_TLS" envDefault:"false"`
+	RabbitMQTLSEnabled    bool   `env:"RABBITMQ_TLS_ENABLED" envDefault:"false"`
+	RabbitMQTLSSkipVerify bool   `env:"RABBITMQ_TLS_SKIP_VERIFY" envDefault:"false"`
 	RabbitMQTLSCACert     string `env:"RABBITMQ_TLS_CA_CERT" envDefault:""`
 	RabbitMQTLSCert       string `env:"RABBITMQ_TLS_CERT" envDefault:""`
 	RabbitMQTLSKey        string `env:"RABBITMQ_TLS_KEY" envDefault:""`
-	RabbitMQTLSSkipVerify bool   `env:"RABBITMQ_TLS_SKIP_VERIFY" envDefault:"false"`
 
 	// RabbitMQ Exchange Names
 	RabbitDepositExchangeName  string `env:"RABBITMQ_DEPOSIT_EXCHANGE_NAME,required"`

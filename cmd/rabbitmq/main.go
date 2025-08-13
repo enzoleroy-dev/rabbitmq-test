@@ -66,10 +66,10 @@ func main() {
 
 	// Create RabbitMQ consumer
 	consumer, err := rabbitmqx.NewConsumer(rabbitmqx.Config{
+		URL:           cfg.RabbitMQURL,
 		User:          cfg.RabbitMQUser,
 		Password:      cfg.RabbitMQPassword,
-		URL:           cfg.RabbitMQURL,
-		UseTLS:        cfg.RabbitMQUseTLS,
+		TLSEnabled:    cfg.RabbitMQTLSEnabled,
 		TLSCACert:     cfg.RabbitMQTLSCACert,
 		TLSCert:       cfg.RabbitMQTLSCert,
 		TLSKey:        cfg.RabbitMQTLSKey,

@@ -19,7 +19,7 @@ type Config struct {
 	User          string
 	Password      string
 	URL           string
-	UseTLS        bool
+	TLSEnabled    bool
 	TLSCACert     string
 	TLSCert       string
 	TLSKey        string
@@ -32,13 +32,13 @@ func NewProducer(cfg Config) (*Producer, error) {
 	var err error
 
 	protocol := "amqp"
-	if cfg.UseTLS {
+	if cfg.TLSEnabled {
 		protocol = "amqps"
 	}
 
 	url := fmt.Sprintf("%s://%s:%s@%s", protocol, cfg.User, cfg.Password, cfg.URL)
 
-	if cfg.UseTLS {
+	if cfg.TLSEnabled {
 		// Configure TLS
 		tlsConfig, tlsErr := createTLSConfig(cfg.TLSCACert, cfg.TLSCert, cfg.TLSKey, cfg.TLSSkipVerify)
 		if tlsErr != nil {
