@@ -4,18 +4,17 @@ networks:
     driver: bridge
 
 services:
-  rabbitmq-ui-proxy:
-    image: kbudde/rabbitmq-exporter:latest
-    container_name: rabbitmq-ui-proxy
-    environment:
-      RABBIT_HOST: ${RABBITMQ_HOST:-localhost}
-      RABBIT_PORT: ${RABBITMQ_PORT:-5672}
-      RABBIT_USERNAME: ${RABBITMQ_USERNAME:-admin123}
-      RABBIT_PASSWORD: ${RABBITMQ_PASSWORD:-admin123}
-      RABBIT_VHOST: ${RABBITMQ_VHOST:-/}
-      RABBIT_SECURE: ${RABBITMQ_SECURE:-false}
-    ports:
-      - "${RABBITMQ_UI_PORT:-15681}:15672" # Expose Management UI
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq_broker
     restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: admin123
+      RABBITMQ_DEFAULT_PASS: admin123
+    ports:
+      - "5672:5672"    # AMQP port
+      - "15672:15672"  # Management UI port
+    volumes:
+      - ./.docker/rabbitmq_data:/var/lib/rabbitmq
     networks:
       - app-network
